@@ -4,13 +4,20 @@ from typing import Dict
 
 db: Dict[int, dict] = {}
 next_id = 1
-
+items = ["item1", "item2", "item3"]
 class UserCreate(BaseModel):
     name: str
     age: int
 
 app = FastAPI()
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+@app.get("/items")
+def get_items():
+    return items
 @app.get("/")
 def root():
     return {"message": "Hello, World!"}
